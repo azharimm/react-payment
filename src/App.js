@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import { AppContainer, Card } from "./components/AppContainer.style";
+import { Back } from "./components/Back.style";
+import Delivery from "./components/Delivery/Delivery";
+import Payment from "./components/Payment/Payment";
+import Summary from "./components/Summary/Summary";
+import Finish from "./components/Finish/Finish";
+import Steps from "./components/Steps/Steps";
+
+const App = () => {
+	return (
+		<>
+			<Steps />
+			<AppContainer>
+				<Back>
+					<ArrowBackIcon /> <span> Back to cart</span>
+				</Back>
+				<Card>
+					<Delivery />
+					{/* <Payment /> */}
+					{/* <Finish /> */}
+					<Summary />
+				</Card>
+			</AppContainer>
+		</>
+	);
+};
 
 export default App;
