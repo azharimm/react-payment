@@ -8,7 +8,6 @@ import { Heading } from "../AppContainer.style";
 
 const Delivery = ({ register, errors }) => {
 	const [{ isDropship, form}, dispatch] = useStateValue();
-	console.log('form: ', form)
 
 	return (
 		<Wrapper>

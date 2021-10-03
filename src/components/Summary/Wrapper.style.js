@@ -5,6 +5,13 @@ export const Wrapper = styled.div`
 	left: 25px;
 	margin-top: 50px;
 
+	& .flex {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		height: 30vh;
+	}
+
 	& .heading {
 		display: block;
 	}
@@ -23,14 +30,9 @@ export const Wrapper = styled.div`
 		background: #d8d8d8;
 	}
 
-	& .details {
-		margin-top: 200px;
-	}
-
 	& .summary__details {
 		display: flex;
 		width: 85%;
-		/* top: 5vh; */
 		justify-content: space-between;
 		line-height: 1.8;
 	}
@@ -38,16 +40,12 @@ export const Wrapper = styled.div`
 	& .summary__details.total {
 		display: flex;
 		color: rgba(255, 138, 0, 1);
-		/* top: 5vh; */
 		font-size: 24px;
 		font-weight: bold;
 		justify-content: space-between;
 		line-height: 1.8;
 	}
 
-	& .summary__button {
-		/* top: 5vh; */
-	}
 	& .summary__button button {
 		background-color: rgba(255, 138, 0, 1);
 		color: #fff;
@@ -67,9 +65,15 @@ export const Wrapper = styled.div`
 	}
 
 	@media (min-width: 768px) {
-		/* top: 100px; */
 		left: 100px;
 		flex-basis: 24%;
+
+		& .flex {
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			height: 70vh;
+		}
 
 		& .heading h1 {
 			font-size: 24px;
@@ -78,16 +82,7 @@ export const Wrapper = styled.div`
 		}
 
 		& .summary__details {
-			/* top: 25vh; */
 			width: 100%;
-		}
-
-		& .summary__details.total {
-			/* top: 25vh; */
-		}
-
-		& .summary__button {
-			/* top: 25vh; */
 		}
 
 		& .summary__button button {
@@ -99,7 +94,6 @@ export const Wrapper = styled.div`
 			width: 100%;
 			cursor: pointer;
 		}
-
 	}
 
 	@media (min-width: 1024px) {
