@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useForm } from "react-hook-form";
@@ -36,6 +36,15 @@ const App = () => {
 		dispatch({type: actionTypes.RESET_STATE })
 		reset({email: null})
 	}
+
+	useEffect(() => {
+		let local = localStorage.getItem('payment-wizard');
+		if(local) {
+			let localState = JSON.parse(local);
+			dispatch({type: actionTypes.LOCAL_STATE, payload: localState});
+			reset(localState.form)
+		}
+	}, [dispatch, reset]);
 
 	return (
 		<>
