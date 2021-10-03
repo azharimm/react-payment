@@ -1,7 +1,7 @@
 import React from "react";
 import { Wrapper, Divider } from "./Wrapper.style";
 
-const Summary = () => {
+const Summary = ({ handleSubmit, onSubmit}) => {
 	return (
 		<Wrapper>
 			<Divider />
@@ -37,7 +37,7 @@ const Summary = () => {
 					<p>505,900</p>
 				</div>
 				<div className="summary__button">
-					<button>Continue to Payment</button>
+					<button onClick={handleSubmit(onSubmit)}>Continue to Payment</button>
 				</div>
 			</div>
 		</Wrapper>

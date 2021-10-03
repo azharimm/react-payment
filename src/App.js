@@ -1,5 +1,6 @@
 import "./App.css";
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { useForm } from "react-hook-form";
 
 import { AppContainer, Card } from "./components/AppContainer.style";
 import { Back } from "./components/Back.style";
@@ -9,7 +10,17 @@ import Summary from "./components/Summary/Summary";
 import Finish from "./components/Finish/Finish";
 import Steps from "./components/Steps/Steps";
 
+
 const App = () => {
+	const {
+		register,
+		handleSubmit,
+		watch,
+		formState: { errors },
+	} = useForm();
+	const onSubmit = (data) => {
+		console.log(data);
+	};
 	return (
 		<>
 			<Steps />
@@ -18,10 +29,10 @@ const App = () => {
 					<ArrowBackIcon /> <span> Back to cart</span>
 				</Back>
 				<Card>
-					<Delivery />
+					<Delivery register={register} errors={errors} />
 					{/* <Payment /> */}
 					{/* <Finish /> */}
-					<Summary />
+					<Summary handleSubmit={handleSubmit} onSubmit={onSubmit} />
 				</Card>
 			</AppContainer>
 		</>

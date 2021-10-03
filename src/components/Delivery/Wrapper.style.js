@@ -75,7 +75,7 @@ export const DropshipCheck = styled.div`
 
 	@media (min-width: 768px) {
 		top: 15px;
-		
+
 		& label {
 			font-size: 18px;
 		}
@@ -85,18 +85,6 @@ export const DropshipCheck = styled.div`
 export const Form = styled.form`
 	display: inline-block;
 
-	input {
-		margin-top: 20px;
-		width: 80vw;
-		height: 40px;
-	}
-
-	textarea {
-		margin-top: 20px;
-		width: 80vw;
-		height: 80px;
-	}
-
 	@media (min-width: 640px) {
 	}
 
@@ -104,20 +92,34 @@ export const Form = styled.form`
 		width: 100%;
 		display: flex;
 		justify-content: space-between;
-
-		input {
-			margin-top: 20px;
-			width: 30vw;
-			height: 60px;
-		}
-
-		textarea {
-			margin-top: 20px;
-			width: 30vw;
-			height: 120px;
-		}
 	}
 
 	@media (min-width: 1024px) {
+	}
+`;
+
+export const Input = styled.input`
+	margin-top: 20px;
+	width: 80vw;
+	height: 40px;
+	border: ${(props) => (props.error ? "1px solid red" : "")};
+
+	@media (min-width: 768px) {
+		margin-top: 20px;
+		width: 30vw;
+		height: 60px;
+	}
+`;
+
+export const Textarea = styled.textarea`
+	margin-top: 20px;
+	width: 80vw;
+	height: 80px;
+	border: ${(props) => (props.error ? "1px solid red" : "")};
+
+	@media (min-width: 768px) {
+		margin-top: 20px;
+		width: 30vw;
+		height: 120px;
 	}
 `;

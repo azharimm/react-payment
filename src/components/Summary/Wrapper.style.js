@@ -83,9 +83,10 @@ export const Wrapper = styled.div`
 		& .summary__button {
 			/* top: 25vh; */
 		}
-
+		
 		& .summary__button button {
 			width: 100%;
+			cursor: pointer;
 		}
 	}
 

@@ -2,8 +2,16 @@
 	opacity: 0.6;
 }
 
+.text-red {
+	color: red;
+}
+
 .text-green {
 	color: #1BD97B;
+}
+
+.text-sm {
+	font-size: 14px;
 }
 
 .mr-20 {
