@@ -1,7 +1,14 @@
 import React from "react";
-import { Wrapper, Divider } from "./Wrapper.style";
 
-const Summary = ({ handleSubmit, onSubmit}) => {
+import { useStateValue } from "../../context/StateProvider";
+
+import { Wrapper, Divider } from "./Wrapper.style";
+import { moneyFormat } from "../../helpers/format";
+
+const Summary = ({ handleSubmit, onSubmit }) => {
+	const [{ delivery, payment, total, isDropship, currentStep }] =
+		useStateValue();
+
 	return (
 		<Wrapper>
 			<Divider />
@@ -9,35 +16,56 @@ const Summary = ({ handleSubmit, onSubmit}) => {
 				<h1>Summary</h1>
 				<p className="text-gray">10 items purchased</p>
 			</div>
-			<div className="divider"></div>
-			<div>
-				<p className="text-gray">Delivery Estimation</p>
-				<p className="text-green">today by GO-SEND</p>
-			</div>
-			<div className="divider"></div>
-			<div>
-				<p className="text-gray">Payment Method</p>
-				<p className="text-green">Bank Transfer</p>
-			</div>
+			{delivery.id && (
+				<>
+					<div className="divider"></div>
+					<div>
+						<p className="text-gray">Delivery Estimation</p>
+						<p className="text-green">{delivery.due} by {delivery.name}</p>
+					</div>
+				</>
+			)}
+			{payment.id && (
+				<>
+					<div className="divider"></div>
+					<div>
+						<p className="text-gray">Payment Method</p>
+						<p className="text-green">{payment.name}</p>
+					</div>
+				</>
+			)}
 			<div className="details">
 				<div className="summary__details">
 					<p className="text-gray">Const of goods</p>
 					<p>500,000</p>
 				</div>
-				<div className="summary__details">
-					<p className="text-gray">Dropshiping fee</p>
-					<p>5,900</p>
-				</div>
-				<div className="summary__details">
-					<p className="text-gray">GO-SEND Shipment</p>
-					<p>9,000</p>
-				</div>
+				{isDropship && (
+					<div className="summary__details">
+						<p className="text-gray">Dropshiping fee</p>
+						<p>{moneyFormat(5900)}</p>
+					</div>
+				)}
+				{ delivery.id && (
+					<div className="summary__details">
+						<p className="text-gray">{delivery.name} Shipment</p>
+						<p>{moneyFormat(delivery.price)}</p>
+					</div>
+				)}
 				<div className="summary__details total">
 					<p>Total</p>
-					<p>505,900</p>
+					<p>{moneyFormat(total+delivery.price)}</p>
 				</div>
 				<div className="summary__button">
-					<button onClick={handleSubmit(onSubmit)}>Continue to Payment</button>
+					{currentStep === 1 && (
+						<button onClick={handleSubmit(onSubmit)}>
+							Continue to Payment
+						</button>
+					)}
+					{currentStep === 2 && (
+						<button onClick={handleSubmit(onSubmit)} disabled={delivery.id === null || payment.id === null}>
+							Pay {payment.name}
+						</button>
+					)}
 				</div>
 			</div>
 		</Wrapper>

@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
+
+import { useStateValue } from '../../context/StateProvider';
+import { actionTypes } from '../../context/reducer';
 
 import { Wrapper, DropshipCheck, Form, Input, Textarea } from "./Wrapper.style";
 import { Heading } from "../AppContainer.style";
 
 const Delivery = ({ register, errors }) => {
-	const [checkDropship, setCheckDropship] = useState(true);
+	const [{ isDropship, form}, dispatch] = useStateValue();
 
 	return (
 		<Wrapper>
@@ -17,9 +20,9 @@ const Delivery = ({ register, errors }) => {
 					<input
 						type="checkbox"
 						name="check"
-						checked={checkDropship}
+						checked={isDropship}
 						onChange={() =>
-							setCheckDropship((prevState) => !prevState)
+							dispatch({type: actionTypes.IS_DROPSHIP})
 						}
 					/>
 					<label>Send as dropship</label>
@@ -32,6 +35,7 @@ const Delivery = ({ register, errors }) => {
 						placeholder="Email"
 						autoComplete="nope"
 						error={errors.email}
+						defaultValue={form.email}
 						{...register("email", {
 							required: true,
 							pattern: {
@@ -55,6 +59,7 @@ const Delivery = ({ register, errors }) => {
 						placeholder="Phone number"
 						autoComplete="nope"
 						error={errors.phone_number}
+						defaultValue={form.phone_number}
 						{...register("phone_number", { required: true, minLength: 6, maxLength: 20 })}
 					/>{" "}
 					<br />
@@ -66,31 +71,36 @@ const Delivery = ({ register, errors }) => {
 						placeholder="Delivery address"
 						autoComplete="nope"
 						error={errors.delivery_address}
+						defaultValue={form.delivery_address}
 						{...register("delivery_address", { required: true, maxLength: 120 })}
 					></Textarea>{" "}
 					<br />
 						{errors.delivery_address && errors.delivery_address.type === "required" && <span className="text-red text-sm">This address field is required</span>}
 						{errors.delivery_address && errors.delivery_address.type === "maxLength" && <span className="text-red text-sm">This field maximum 120 character</span> }
 				</div>
-				{checkDropship && (
+				{isDropship && (
 					<div className="form__dropship">
 						<Input
 							type="text"
 							placeholder="Dropshipper name"
 							autoComplete="nope"
 							error={errors.dropship_name}
+							defaultValue={form.dropship_name}
 							{...register("dropship_name", { required: true })}
 						/>{" "}
 						<br />
 						{errors.dropship_name && errors.dropship_name.type === "required" && <span className="text-red text-sm">This dropship name field is required</span>}
 						<br />
 						<Input
-							type="text"
+							type="number"
 							placeholder="Dropshipper phone number"
 							autoComplete="nope"
 							error={errors.dropship_phone_number}
+							defaultValue={form.dropship_phone_number}
 							{...register("dropship_phone_number", {
 								required: true,
+								minLength: 6,
+								maxLength: 20
 							})}
 						/>{" "}
 						<br />

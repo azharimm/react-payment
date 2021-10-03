@@ -2,6 +2,9 @@ import "./App.css";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useForm } from "react-hook-form";
 
+import { useStateValue } from './context/StateProvider';
+import { actionTypes } from './context/reducer';
+
 import { AppContainer, Card } from "./components/AppContainer.style";
 import { Back } from "./components/Back.style";
 import Delivery from "./components/Delivery/Delivery";
@@ -18,8 +21,11 @@ const App = () => {
 		watch,
 		formState: { errors },
 	} = useForm();
+	const [{steps, currentStep}, dispatch] = useStateValue();
+
 	const onSubmit = (data) => {
-		console.log(data);
+		dispatch({type: actionTypes.SET_FORM, payload: data})
+		dispatch({type: actionTypes.NEXT_STEP})
 	};
 	return (
 		<>
@@ -29,9 +35,9 @@ const App = () => {
 					<ArrowBackIcon /> <span> Back to cart</span>
 				</Back>
 				<Card>
-					<Delivery register={register} errors={errors} />
-					{/* <Payment /> */}
-					{/* <Finish /> */}
+					{currentStep === 1 && <Delivery register={register} errors={errors} /> }
+					{currentStep === 2 && <Payment /> }
+					{currentStep === 3 && <Finish /> }
 					<Summary handleSubmit={handleSubmit} onSubmit={onSubmit} />
 				</Card>
 			</AppContainer>

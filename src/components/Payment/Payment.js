@@ -1,8 +1,21 @@
 import React from "react";
+import { useStateValue } from '../../context/StateProvider';
+import { actionTypes } from '../../context/reducer';
+
 import CheckIcon from "@mui/icons-material/Check";
 import { Wrapper, BoxItem } from "./Wrapper.style";
 import { Heading } from "../AppContainer.style";
 const Payment = () => {
+	const [{ deliveryOption, delivery, paymentOption, payment }, dispatch] = useStateValue();
+
+	const selectShipment = (shipment) => {
+		dispatch({type: actionTypes.SET_SHIPMENT, payload: shipment})
+	}
+	
+	const selectPayment = (payment) => {
+		dispatch({type: actionTypes.SET_PAYMENT, payload: payment})
+	}
+
 	return (
 		<Wrapper>
 			<div className="details__heading">
@@ -12,35 +25,21 @@ const Payment = () => {
 				</Heading>
 			</div>
 			<div className="box">
-				<BoxItem isSelected={true}>
-					<div className="content">
-						<div>
-							<span>GO-SEND</span>
-							<p>15,000</p>
-						</div>
-						<div>
-							<CheckIcon />
-						</div>
-					</div>
-				</BoxItem>
-				<BoxItem>
-					<div className="content">
-						<div>
-							<span>JNE</span>
-							<p>9,000</p>
-						</div>
-						<div>{/* <CheckIcon /> */}</div>
-					</div>
-				</BoxItem>
-				<BoxItem>
-					<div className="content">
-						<div>
-							<span>Personal Courier</span>
-							<p>29,000</p>
-						</div>
-						<div>{/* <CheckIcon /> */}</div>
-					</div>
-				</BoxItem>
+				{
+					deliveryOption.map(shipment => (
+						<BoxItem isSelected={shipment.id === delivery.id} onClick={() => selectShipment(shipment)} key={shipment.id} >
+							<div className="content">
+								<div>
+									<span>{shipment.name}</span>
+									<p>{shipment.price}</p>
+								</div>
+								<div>
+									{shipment.id === delivery.id && <CheckIcon />}
+								</div>
+							</div>
+						</BoxItem>
+					))
+				}
 			</div>
 
 			<div className="details__heading mt-100">
@@ -50,29 +49,21 @@ const Payment = () => {
 				</Heading>
 			</div>
 			<div className="box">
-				<BoxItem isSelected={true}>
-					<div className="content">
-						<div>
-							<span>e-Wallet</span>
-							<p>1,500,000 Left</p>
-						</div>
-						<div>
-							<CheckIcon />
-						</div>
-					</div>
-				</BoxItem>
-				<BoxItem>
-					<div className="content">
-						<p>Bank Transfer</p>
-						{/* <CheckIcon /> */}
-					</div>
-				</BoxItem>
-				<BoxItem>
-					<div className="content">
-						<p>Virtual Account</p>
-						{/* <CheckIcon /> */}
-					</div>
-				</BoxItem>
+				{
+					paymentOption.map(pay => (
+						<BoxItem isSelected={pay.id === payment.id} onClick={() => selectPayment(pay)} key={pay.id}>
+							<div className="content">
+								<div>
+									{pay.id === 1 && <span>{pay.name}</span>}
+									{pay.id === 1 ? <p>1,500,000 Left</p> : <p>{pay.name}</p>}
+								</div>
+								<div>
+									{pay.id === payment.id && <CheckIcon />}
+								</div>
+							</div>
+						</BoxItem>
+					))
+				}
 			</div>
 		</Wrapper>
 	);

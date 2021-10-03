@@ -55,6 +55,12 @@ export const Wrapper = styled.div`
 		height: 60px;
 		margin-top: 20px;
 		border: none;
+		cursor: pointer;
+	}
+
+	& .summary__button button:disabled {
+		cursor: not-allowed;
+		opacity: 0.6;
 	}
 
 	@media (min-width: 640px) {
@@ -83,11 +89,17 @@ export const Wrapper = styled.div`
 		& .summary__button {
 			/* top: 25vh; */
 		}
-		
+
 		& .summary__button button {
 			width: 100%;
 			cursor: pointer;
 		}
+
+		& .summary__button button {
+			width: 100%;
+			cursor: pointer;
+		}
+
 	}
 
 	@media (min-width: 1024px) {
@@ -112,4 +124,3 @@ export const Divider = styled.div`
 		height: 66vh;
 	}
 `;
-

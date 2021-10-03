@@ -1,6 +1,6 @@
 export const initialState = {
-	steps: 1,
-	currentStep: 1,
+	steps: 2,
+	currentStep: 2,
 	isDropship: true,
 	form: {
 		email: null,
@@ -14,28 +14,45 @@ export const initialState = {
 			id: 1,
 			name: "GO-SEND",
 			price: 15000,
-            due: "today"
+			due: "today",
 		},
 		{
 			id: 2,
 			name: "JNE",
 			price: 9000,
-            due: "2 days"
+			due: "2 days",
 		},
 		{
 			id: 3,
 			name: "Personal Courier",
 			price: 29000,
-            due: "1 day"
+			due: "1 day",
+		},
+	],
+	paymentOption: [
+		{
+			id: 1,
+			name: "e-Wallet",
+		},
+		{
+			id: 2,
+			name: "Bank Transfer",
+		},
+		{
+			id: 3,
+			name: "Virtual Account",
 		},
 	],
 	delivery: {
 		id: null,
 		name: null,
 		price: null,
-        due: null
+		due: null,
 	},
-	payment: null,
+	payment: {
+		id: null,
+		name: null,
+	},
 	total: 505900,
 };
 
@@ -44,6 +61,7 @@ export const actionTypes = {
 	SET_FORM: "SET_FORM",
 	NEXT_STEP: "NEXT_STEP",
 	SET_SHIPMENT: "SET_SHIPMENT",
+	SET_PAYMENT: "SET_PAYMENT",
 };
 
 const reducer = (state, action) => {
@@ -70,7 +88,12 @@ const reducer = (state, action) => {
 		case actionTypes.SET_SHIPMENT:
 			return {
 				...state,
-				delivery: {...action.payload},
+				delivery: { ...action.payload },
+			};
+		case actionTypes.SET_PAYMENT:
+			return {
+				...state,
+				payment: { ...action.payload },
 			};
 		default:
 			return state;
