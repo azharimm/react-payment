@@ -108,6 +108,10 @@ const reducer = (state, action) => {
 					state.currentStep <= 3 && state.currentStep > 1
 						? state.currentStep - 1
 						: state.currentStep,
+				steps:
+					state.steps <= 3 && state.steps > 1
+						? state.steps - 1
+						: state.steps,
 			};
 		case actionTypes.RESET_STATE:
 			return {
