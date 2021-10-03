@@ -1,5 +1,5 @@
 export const moneyFormat = (value) => {
-    return value.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,");
+    return value.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,").replace('.00','');
 };
 
 export const randomId = (length) => {

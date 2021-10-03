@@ -44,6 +44,7 @@ export const Wrapper = styled.div`
 		font-weight: bold;
 		justify-content: space-between;
 		line-height: 1.8;
+		margin-bottom: 20px;
 	}
 
 	& .summary__button button {
@@ -51,7 +52,7 @@ export const Wrapper = styled.div`
 		color: #fff;
 		width: 80%;
 		height: 60px;
-		margin-top: 20px;
+		margin-bottom: 20px;
 		border: none;
 		cursor: pointer;
 	}

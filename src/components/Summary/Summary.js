@@ -42,18 +42,18 @@ const Summary = ({ handleSubmit, onSubmit }) => {
 					<div className="details">
 						<div className="summary__details">
 							<p className="text-gray">Const of goods</p>
-							<p>500,000</p>
+							<p className="text-bold">500,000</p>
 						</div>
 						{isDropship && (
 							<div className="summary__details">
 								<p className="text-gray">Dropshiping fee</p>
-								<p>{moneyFormat(5900)}</p>
+								<p className="text-bold">{moneyFormat(5900)}</p>
 							</div>
 						)}
 						{ delivery.id && (
 							<div className="summary__details">
 								<p className="text-gray">{delivery.name} Shipment</p>
-								<p>{moneyFormat(delivery.price)}</p>
+								<p className="text-bold">{moneyFormat(delivery.price)}</p>
 							</div>
 						)}
 						<div className="summary__details total">
