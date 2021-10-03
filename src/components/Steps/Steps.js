@@ -4,7 +4,7 @@ import { Wrapper } from "./Wrapper.style";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 const Steps = () => {
-	const [{ steps }, dispatch] = useStateValue();
+	const [{ steps }] = useStateValue();
 	return (
 		<Wrapper>
 			<div className="step">

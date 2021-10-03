@@ -1,4 +1,4 @@
-export const initialState = {
+const defaultState = {
 	steps: 1,
 	currentStep: 1,
 	isDropship: true,
@@ -9,6 +9,17 @@ export const initialState = {
 		dropship_name: null,
 		dropship_phone_number: null,
 	},
+	delivery: {
+		id: null,
+		name: null,
+		price: null,
+		due: null,
+	},
+	payment: {
+		id: null,
+		name: null,
+	},
+	total: 505900,
 	deliveryOption: [
 		{
 			id: 1,
@@ -43,17 +54,10 @@ export const initialState = {
 			name: "Virtual Account",
 		},
 	],
-	delivery: {
-		id: null,
-		name: null,
-		price: null,
-		due: null,
-	},
-	payment: {
-		id: null,
-		name: null,
-	},
-	total: 505900,
+};
+
+export const initialState = {
+	...defaultState,
 };
 
 export const actionTypes = {
@@ -63,6 +67,7 @@ export const actionTypes = {
 	SET_SHIPMENT: "SET_SHIPMENT",
 	SET_PAYMENT: "SET_PAYMENT",
 	BACK_STEP: "BACK_STEP",
+	RESET_STATE: "RESET_STATE",
 };
 
 const reducer = (state, action) => {
@@ -99,7 +104,27 @@ const reducer = (state, action) => {
 		case actionTypes.BACK_STEP:
 			return {
 				...state,
-				currentStep: state.currentStep <= 3 && state.currentStep > 1 ? state.currentStep - 1 : state.currentStep,
+				currentStep:
+					state.currentStep <= 3 && state.currentStep > 1
+						? state.currentStep - 1
+						: state.currentStep,
+			};
+		case actionTypes.RESET_STATE:
+			return {
+				...state,
+				form: {
+					email: null,
+					phone_number: null,
+					delivery_address: null,
+					dropship_name: null,
+					dropship_phone_number: null,
+				},
+				delivery: { ...defaultState.delivery },
+				payment: { ...defaultState.payment },
+				steps: defaultState.steps,
+				currentStep: defaultState.steps,
+				total: defaultState.total,
+				isDropship: defaultState.isDropship,
 			};
 		default:
 			return state;

@@ -4,11 +4,9 @@ import { randomId } from "../../helpers/format";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Wrapper } from "./Wrapper.style";
 import { Heading } from "../AppContainer.style";
-const Finish = () => {
-	const [{ delivery }, dispatch] = useStateValue();
-	const resetState = () => {
-		console.log('reset')
-	}
+const Finish = ({ resetForm }) => {
+	const [{ delivery }] = useStateValue();
+
 	return (
 		<Wrapper>
 			<div className="heading">
@@ -20,7 +18,7 @@ const Finish = () => {
 			<p>Order ID : {randomId(5)}</p>
 			<p>Your order will be delivered {delivery.due} with {delivery.name}</p>
 
-			<div className="back" onClick={resetState}>
+			<div className="back" onClick={resetForm}>
 				<ArrowBackIcon /> <span className="text-gray"> Back to cart</span>
 			</div>
 		</Wrapper>
