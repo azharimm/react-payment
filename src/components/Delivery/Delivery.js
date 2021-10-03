@@ -6,7 +6,7 @@ import { actionTypes } from '../../context/reducer';
 import { Wrapper, DropshipCheck, Form, Input, Textarea } from "./Wrapper.style";
 import { Heading } from "../AppContainer.style";
 
-const Delivery = ({ register, errors }) => {
+const Delivery = ({ register, errors, reset, getValues }) => {
 	const [{ isDropship, form}, dispatch] = useStateValue();
 
 	return (
@@ -21,8 +21,10 @@ const Delivery = ({ register, errors }) => {
 						type="checkbox"
 						name="check"
 						checked={isDropship}
-						onChange={() =>
+						onChange={() => {
 							dispatch({type: actionTypes.IS_DROPSHIP})
+							reset({ ...getValues(), dropship_name: null, dropship_phone_number: null })
+							}
 						}
 					/>
 					<label>Send as dropship</label>
@@ -78,7 +80,7 @@ const Delivery = ({ register, errors }) => {
 						{errors.delivery_address && errors.delivery_address.type === "required" && <span className="text-red text-sm">This address field is required</span>}
 						{errors.delivery_address && errors.delivery_address.type === "maxLength" && <span className="text-red text-sm">This field maximum 120 character</span> }
 				</div>
-				{isDropship && (
+				
 					<div className="form__dropship">
 						<Input
 							type="text"
@@ -86,7 +88,8 @@ const Delivery = ({ register, errors }) => {
 							autoComplete="nope"
 							error={errors.dropship_name}
 							defaultValue={form.dropship_name}
-							{...register("dropship_name", { required: true })}
+							disabled={!isDropship}
+							{...register("dropship_name", { required: !isDropship ? false : true })}
 						/>{" "}
 						<br />
 						{errors.dropship_name && errors.dropship_name.type === "required" && <span className="text-red text-sm">This dropship name field is required</span>}
@@ -97,8 +100,9 @@ const Delivery = ({ register, errors }) => {
 							autoComplete="nope"
 							error={errors.dropship_phone_number}
 							defaultValue={form.dropship_phone_number}
+							disabled={!isDropship}
 							{...register("dropship_phone_number", {
-								required: true,
+								required: !isDropship ? false : true,
 								minLength: 6,
 								maxLength: 20
 							})}
@@ -108,7 +112,7 @@ const Delivery = ({ register, errors }) => {
 						{errors.dropship_phone_number && errors.dropship_phone_number.type === "minLength" && <span className="text-red text-sm">This field minimum 6 character</span> }
 						{errors.dropship_phone_number && errors.dropship_phone_number.type === "maxLength" && <span className="text-red text-sm">This field maximum 20 character</span> }
 					</div>
-				)}
+			
 			</Form>
 		</Wrapper>
 	);

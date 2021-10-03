@@ -20,6 +20,7 @@ const App = () => {
 		handleSubmit,
 		reset,
 		formState: { errors },
+		getValues,
 	} = useForm();
 	const [{ currentStep }, dispatch] = useStateValue();
 
@@ -33,7 +34,7 @@ const App = () => {
 	};
 	const resetForm = () => {
 		dispatch({type: actionTypes.RESET_STATE })
-		reset()
+		reset({email: null})
 	}
 
 	return (
@@ -49,7 +50,7 @@ const App = () => {
 				)}
 				<Card>
 					{currentStep === 1 && (
-						<Delivery register={register} errors={errors} />
+						<Delivery register={register} errors={errors} reset={reset} getValues={getValues} />
 					)}
 					{currentStep === 2 && <Payment />}
 					{currentStep === 3 && <Finish resetForm={resetForm} />}
