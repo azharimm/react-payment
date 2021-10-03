@@ -1,6 +1,6 @@
 export const initialState = {
-	steps: 2,
-	currentStep: 2,
+	steps: 1,
+	currentStep: 1,
 	isDropship: true,
 	form: {
 		email: null,
@@ -62,6 +62,7 @@ export const actionTypes = {
 	NEXT_STEP: "NEXT_STEP",
 	SET_SHIPMENT: "SET_SHIPMENT",
 	SET_PAYMENT: "SET_PAYMENT",
+	BACK_STEP: "BACK_STEP",
 };
 
 const reducer = (state, action) => {
@@ -94,6 +95,11 @@ const reducer = (state, action) => {
 			return {
 				...state,
 				payment: { ...action.payload },
+			};
+		case actionTypes.BACK_STEP:
+			return {
+				...state,
+				currentStep: state.currentStep <= 3 && state.currentStep > 1 ? state.currentStep - 1 : state.currentStep,
 			};
 		default:
 			return state;

@@ -10,6 +10,8 @@ export const Back = styled.div`
 	overflow: hidden;
 	font-size: 12px;
 	opacity: 0.6;
+	cursor: pointer;
+	z-index: 1;
 
     & span {
         top: -5px;
