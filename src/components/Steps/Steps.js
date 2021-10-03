@@ -1,12 +1,14 @@
 import React from "react";
+import { useStateValue } from '../../context/StateProvider';
 import { Wrapper } from "./Wrapper.style";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 const Steps = () => {
+	const [{ steps }, dispatch] = useStateValue();
 	return (
 		<Wrapper>
 			<div className="step">
-				<div className="step_number active">
+				<div className={`step_number ${steps >= 1 && 'active'}`}>
 					<span>1</span>
 				</div>
 				<div className="step_name">Delivery</div>
@@ -15,7 +17,7 @@ const Steps = () => {
                 </div>
 			</div>
             <div className="step">
-				<div className="step_number">
+				<div className={`step_number ${steps >= 2 && 'active'}`}>
 					<span>2</span>
 				</div>
 				<div className="step_name">Payment</div>
@@ -24,7 +26,7 @@ const Steps = () => {
                 </div>
 			</div>
             <div className="step">
-				<div className="step_number">
+				<div className={`step_number ${steps >= 3 && 'active'}`}>
 					<span>3</span>
 				</div>
 				<div className="step_name">Finish</div>
